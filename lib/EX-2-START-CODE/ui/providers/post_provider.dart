@@ -7,7 +7,7 @@ import 'async_value.dart';
 class PostProvider extends ChangeNotifier {
   final PostRepository _repository;
 
-  AsyncValue<Post>? postValue;
+  AsyncValue<List<Post>>? postValue;
 
   PostProvider({required PostRepository repository}) : _repository = repository;
 
@@ -18,10 +18,13 @@ class PostProvider extends ChangeNotifier {
 
     try {
       // 2   Fetch the data
-      Post post = await _repository.getPost(postId);
-
-      // 3  Set success state
-      postValue = AsyncValue.success(post);
+      List<Post> post = await _repository.getPost(postId);
+      if (post.isEmpty) {
+        postValue = AsyncValue.empty();
+      } else {
+        // 3  Set success state
+        postValue = AsyncValue.success(post);
+      }
     } catch (error) {
       // 4  Set error state
       postValue = AsyncValue.error(error);
