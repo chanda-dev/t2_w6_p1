@@ -18,8 +18,8 @@ class CoursesProvider {
     throw Exception('Course not found: $courseName');
   }
 
-  void addScore(String couseName, CourseScore score) {
-    final course = getCourseFor(couseName);
+  void addScore(String courseName, CourseScore score) {
+    final course = getCourseFor(courseName);
     _repository.addScore(course, score);
   }
 }

@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:t2_w6_p1/EX-1-START-CODE/prividers/courses_provider.dart';
 import '../models/course.dart';
 import 'course_score_form.dart';
 
@@ -12,6 +13,7 @@ class CourseScreen extends StatefulWidget {
 }
 
 class _CourseScreenState extends State<CourseScreen> {
+  final CoursesProvider _provider = CoursesProvider();
   List<CourseScore> get scores => widget.course.scores;
 
   void _addScore() async {
@@ -20,6 +22,7 @@ class _CourseScreenState extends State<CourseScreen> {
     );
 
     if (newSCore != null) {
+      _provider.addScore(widget.course.name, newSCore);
       setState(() {
         scores.add(newSCore);
       });

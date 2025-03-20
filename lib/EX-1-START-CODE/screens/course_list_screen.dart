@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:t2_w6_p1/EX-1-START-CODE/prividers/courses_provider.dart';
 import '../models/course.dart';
 import 'course_screen.dart';
 
@@ -12,8 +13,8 @@ class CourseListScreen extends StatefulWidget {
 }
 
 class _CourseListScreenState extends State<CourseListScreen> {
-  final List<Course> _allCourses = [Course(name: 'HTML'), Course(name: 'JAVA')];
-
+  final CoursesProvider _provider = CoursesProvider();
+  late final List<Course> _allCourses = _provider.getCourses();
   void _editCourse(Course course) async {
     await Navigator.of(context).push<Course>(
       MaterialPageRoute(builder: (ctx) => CourseScreen(course: course)),
